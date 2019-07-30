@@ -5,45 +5,17 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
-  pullPolicy: IfNotPresent
+  repository: gcr.io/sqn-development/helloworld-application
+  tag: sha256:ce60d546596bde9b10b01fa5b94f4615f199a94715f8603403e178a943c6b779
+  pullPolicy: Always
 
 nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 
-ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths: []
-
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+microservice:
+  port: 3017
+  version: "v0.0.1"
